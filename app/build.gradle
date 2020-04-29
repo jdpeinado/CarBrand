@@ -41,4 +41,12 @@ dependencies {
     implementation "androidx.room:room-ktx:2.2.5"
     kapt "androidx.room:room-compiler:2.2.5"
     androidTestImplementation "androidx.room:room-testing:2.2.5"
+
+    //recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    //lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 }

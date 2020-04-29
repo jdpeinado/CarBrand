@@ -1,4 +1,4 @@
-package com.josedo.carbrand
+package com.josedo.carbrand.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

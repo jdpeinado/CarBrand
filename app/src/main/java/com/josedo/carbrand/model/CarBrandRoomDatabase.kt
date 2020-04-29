@@ -1,4 +1,4 @@
-package com.josedo.carbrand
+package com.josedo.carbrand.model
 
 import android.content.Context
 import androidx.room.Database
