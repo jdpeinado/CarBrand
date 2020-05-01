@@ -13,9 +13,21 @@
         <action
             android:id="@+id/action_homeFragment_to_carBrandFragment"
             app:destination="@id/navCarBrandFragment" />
+        <action
+            android:id="@+id/action_navHomeFragment_to_dataInputFragment"
+            app:destination="@id/dataInputFragment" />
     </fragment>
     <fragment
         android:id="@+id/navCarBrandFragment"
         android:name="com.josedo.carbrand.view.ui.CarBrandFragment"
-        android:label="CarBrandFragment" />
+        android:label="CarBrandFragment" >
+        <action
+            android:id="@+id/action_navCarBrandFragment_to_dataInputFragment"
+            app:destination="@id/dataInputFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/dataInputFragment"
+        android:name="com.josedo.carbrand.view.ui.DataInputFragment"
+        android:label="fragment_data_input"
+        tools:layout="@layout/fragment_data_input" />
 </navigation>

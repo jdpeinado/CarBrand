@@ -8,8 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.josedo.carbrand.model.BrandRepository
 import com.josedo.carbrand.model.CarBrand
 import com.josedo.carbrand.model.CarBrandRoomDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application): AndroidViewModel(application) {
+class ShareViewModel(application: Application): AndroidViewModel(application) {
     private val repository: BrandRepository
     var listBrands: LiveData<List<CarBrand>>
     var isLoading = MutableLiveData<Boolean>()
@@ -29,5 +31,9 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         isLoading.value = true
         listBrands = repository.listBrands
         isLoading.value =  false
+    }
+
+    fun insert(carBrand: CarBrand) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insert(carBrand)
     }
 }

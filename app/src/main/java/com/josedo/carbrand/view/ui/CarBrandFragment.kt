@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.josedo.carbrand.R
 import com.josedo.carbrand.view.adapter.CarBrandAdapter
-import com.josedo.carbrand.viewmodel.MainViewModel
+import com.josedo.carbrand.viewmodel.ShareViewModel
 import kotlinx.android.synthetic.main.fragment_car_brand.*
 
 /**
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_car_brand.*
  */
 class CarBrandFragment : Fragment() {
     private lateinit var carBrandAdapter: CarBrandAdapter
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var viewModel: ShareViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -29,10 +30,10 @@ class CarBrandFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainViewModel = ViewModelProviders.of(this).get(
-            MainViewModel::class.java
+        viewModel = ViewModelProviders.of(this).get(
+            ShareViewModel::class.java
         )
-        mainViewModel.refresh()
+        viewModel.refresh()
 
         carBrandAdapter = CarBrandAdapter()
 
@@ -42,14 +43,18 @@ class CarBrandFragment : Fragment() {
         }
 
         observeViewModel()
+
+        floating_action_button.setOnClickListener {
+            findNavController().navigate(R.id.dataInputFragment)
+        }
     }
 
     fun observeViewModel() {
-        mainViewModel.listBrands.observe(viewLifecycleOwner, Observer {
+        viewModel.listBrands.observe(viewLifecycleOwner, Observer {
             carBrandAdapter.updateData(it)
         })
 
-        mainViewModel.isLoading.observe(viewLifecycleOwner, Observer<Boolean> {
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer<Boolean> {
             if (it != null) {
                 if (it)
                     rlBrandProgress.visibility = View.VISIBLE
